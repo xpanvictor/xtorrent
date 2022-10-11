@@ -3,5 +3,11 @@
 const fs = require('fs')
 const bencode = require('bencode')
 
+const tracker = require('./tracker')
+
+
 const torrent = bencode.decode(fs.readFileSync(__dirname + '/dsa.torrent'))
-console.log(torrent.announce.toString('utf8'))
+
+tracker.getPeers(torrent, (peers: Array<any>) => {
+    console.log('list of peers: ', peers)
+})
